@@ -6,7 +6,11 @@ setup(
     packages=find_packages(),
     scripts=['fasth.py'],
 
-    install_requires=[],
+    install_requires=[
+         'screed',
+         'click',
+         'biopython'
+    ],
 
     author='Jordan Gumm',
     author_email='jordan@variantanalytics.com',

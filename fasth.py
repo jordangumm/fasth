@@ -53,8 +53,8 @@ def estimate_reads(input_file, num_reads, test):
 
     if test:
         read_truth = query_num_reads(input_file, lines_per_read)
-        print 'true number of reads:      {}'.format(read_truth)
-        print 'estimated number of reads: {}'.format(read_estimate)
+        print('true number of reads:      {}'.format(read_truth))
+        print('estimated number of reads: {}'.format(read_estimate))
 
     return read_estimate
 
