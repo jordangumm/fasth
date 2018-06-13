@@ -4,7 +4,6 @@ setup(
     name='fasth',
     version='0.1',
     packages=find_packages(),
-    scripts=['fasth.py'],
 
     install_requires=[
          'screed',
