@@ -56,13 +56,13 @@ def estimate_reads(input_file, num_reads=1000000):
 def run_experiment(input_file, num_reads, test):
     lines_per_read = get_lines_per_read(input_file)
     read_estimate = estimate_num_reads(input_file, num_reads, lines_per_read)
+    print('true number of reads:      {}'.format(read_truth))
 
     if test:
         read_truth = query_num_reads(input_file, lines_per_read)
-        print('true number of reads:      {}'.format(read_truth))
         print('estimated number of reads: {}'.format(read_estimate))
 
-    return read_estimate
+    return None 
 
 
 if __name__ == "__main__":
