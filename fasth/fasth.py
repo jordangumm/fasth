@@ -33,22 +33,28 @@ def query_num_reads(input_file, lines_per_read):
         return (i+1)/lines_per_read
 
 
-@click.command()
-@click.argument('input_file')
-@click.option('-n', '--num_reads', default=1000)
-@click.option('--test/--no_test', default=False)
-def estimate_reads(input_file, num_reads, test):
+def get_lines_per_read(input_file):
     tmp = open(input_file)
     tmp = tmp.readline()[0]
     if '>' == tmp:
-        input_format = 'fasta'
-        lines_per_read = 2
+        return 2
     elif '@' == tmp:
-        input_format = 'fastq'
-        lines_per_read = 4
+        return 4
     else:
         sys.exit('File does not appear to be fasa or fastq')
 
+
+def estimate_reads(input_file, num_reads=1000000):
+    lines_per_read = get_lines_per_read(input_file)
+    return estimate_num_reads(input_file, num_reads, lines_per_read) 
+
+
+@click.command()
+@click.argument('input_file')
+@click.option('-n', '--num_reads', default=1000000)
+@click.option('--test/--no_test', default=False)
+def run_experiment(input_file, num_reads, test):
+    lines_per_read = get_lines_per_read(input_file)
     read_estimate = estimate_num_reads(input_file, num_reads, lines_per_read)
 
     if test:
@@ -60,5 +66,5 @@ def estimate_reads(input_file, num_reads, test):
 
 
 if __name__ == "__main__":
-    estimate_reads()
+    run_experiment()
     
