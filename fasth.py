@@ -23,7 +23,14 @@ def estimate_num_reads(input_file, num_reads, lines_per_read):
     finally:
         os.remove(path)
 
-    return (os.path.getsize(input_file) / tmp_file_size) * num_reads
+    return int((float(os.path.getsize(input_file)) / float(tmp_file_size)) * float(num_reads))
+
+
+def query_num_reads(input_file, lines_per_read):
+    with open(input_file) as fasta:
+        for i, line in enumerate(fasta):
+            pass
+        return (i+1)/lines_per_read
 
 
 @click.command()
@@ -45,9 +52,7 @@ def estimate_reads(input_file, num_reads, test):
     read_estimate = estimate_num_reads(input_file, num_reads, lines_per_read)
 
     if test:
-        read_truth = 0
-        for record in SeqIO.parse(input_file, input_format):
-            read_truth += 1
+        read_truth = query_num_reads(input_file, lines_per_read)
         print 'true number of reads:      {}'.format(read_truth)
         print 'estimated number of reads: {}'.format(read_estimate)
 
